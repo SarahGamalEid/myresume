@@ -14,15 +14,58 @@
 
         body {
             background: #f0f2f5;
-            padding: 2rem;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
-        .resume {
+        nav {
+            background: #2c3e50;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: #34495e;
+        }
+
+        .nav-links a.active {
+            background: #3498db;
+        }
+
+        .page {
+            display: none;
+            padding: 6rem 2rem 2rem;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .container {
             max-width: 800px;
             margin: 0 auto;
             background: white;
             padding: 2rem;
+            border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -58,6 +101,14 @@
 
         .entry {
             margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .entry:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .entry-title {
@@ -93,83 +144,272 @@
             padding: 0.5rem 1rem;
             border-radius: 20px;
             color: #2c3e50;
+            transition: transform 0.3s;
+        }
+
+        .skill:hover {
+            transform: scale(1.05);
+        }
+
+        .achievement-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s;
+        }
+
+        .achievement-card:hover {
+            transform: translateX(10px);
+        }
+
+        .book-card {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .book-cover {
+            width: 100px;
+            height: 150px;
+            background: #ddd;
+            border-radius: 4px;
+        }
+
+        .course-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #2ecc71;
+            transition: transform 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateX(10px);
+        }
+
+        .course-platform {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            nav {
+                padding: 0.5rem;
+            }
+
+            .page {
+                padding-top: 12rem;
+            }
+
+            .book-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .book-cover {
+                margin: 0 auto;
+            }
         }
 
         @media print {
-            body {
-                padding: 0;
-                background: white;
+            nav {
+                display: none;
             }
 
-            .resume {
+            .page {
+                display: block;
+                padding: 2rem;
+            }
+
+            .container {
+                box-shadow: none;
+            }
+
+            .entry:hover, .skill:hover, .achievement-card:hover, 
+            .book-card:hover, .course-card:hover {
+                transform: none;
                 box-shadow: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="resume">
-        <div class="header">
-            <h1>Your Name</h1>
-            <div class="contact-info">
-                <p>Email: your.email@example.com | Phone: (123) 456-7890</p>
-                <p>Location: City, State | LinkedIn: linkedin.com/in/yourprofile</p>
-            </div>
+    <nav>
+        <div class="nav-links">
+            <a href="#resume" class="active" onclick="showPage('resume')">Resume</a>
+            <a href="#achievements" onclick="showPage('achievements')">Achievements</a>
+            <a href="#books" onclick="showPage('books')">Books</a>
+            <a href="#courses" onclick="showPage('courses')">Courses</a>
         </div>
+    </nav>
 
-        <div class="section">
-            <h2 class="section-title">Professional Summary</h2>
-            <p>A brief 2-3 sentence overview of your professional background, key skills, and career goals.</p>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">Work Experience</h2>
-            
-            <div class="entry">
-                <div class="entry-title">Job Title</div>
-                <div class="entry-subtitle">Company Name</div>
-                <div class="entry-date">Month Year - Present</div>
-                <ul class="entry-description">
-                    <li>Key achievement or responsibility</li>
-                    <li>Another significant accomplishment</li>
-                    <li>Notable contribution or project</li>
-                </ul>
+    <!-- Resume Page -->
+    <div id="resume" class="page active">
+        <div class="container">
+            <div class="header">
+                <h1>Your Name</h1>
+                <div class="contact-info">
+                    <p>Email: your.email@example.com | Phone: (123) 456-7890</p>
+                    <p>Location: City, State | LinkedIn: linkedin.com/in/yourprofile</p>
+                </div>
             </div>
 
-            <div class="entry">
-                <div class="entry-title">Previous Job Title</div>
-                <div class="entry-subtitle">Previous Company</div>
-                <div class="entry-date">Month Year - Month Year</div>
-                <ul class="entry-description">
-                    <li>Key achievement or responsibility</li>
-                    <li>Another significant accomplishment</li>
-                </ul>
+            <div class="section">
+                <h2 class="section-title">Professional Summary</h2>
+                <p>A brief 2-3 sentence overview of your professional background, key skills, and career goals.</p>
             </div>
-        </div>
 
-        <div class="section">
-            <h2 class="section-title">Education</h2>
-            <div class="entry">
-                <div class="entry-title">Degree Name</div>
-                <div class="entry-subtitle">University Name</div>
-                <div class="entry-date">Graduation Year</div>
-                <div class="entry-description">
-                    Relevant coursework, honors, or achievements
+            <div class="section">
+                <h2 class="section-title">Work Experience</h2>
+                
+                <div class="entry">
+                    <div class="entry-title">Senior Developer</div>
+                    <div class="entry-subtitle">Tech Company</div>
+                    <div class="entry-date">January 2020 - Present</div>
+                    <ul class="entry-description">
+                        <li>Led development of key features resulting in 40% user growth</li>
+                        <li>Managed team of 5 developers across multiple projects</li>
+                        <li>Implemented CI/CD pipeline reducing deployment time by 60%</li>
+                    </ul>
+                </div>
+
+                <div class="entry">
+                    <div class="entry-title">Software Developer</div>
+                    <div class="entry-subtitle">Previous Company</div>
+                    <div class="entry-date">June 2017 - December 2019</div>
+                    <ul class="entry-description">
+                        <li>Developed responsive web applications using React</li>
+                        <li>Improved application performance by 50%</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Education</h2>
+                <div class="entry">
+                    <div class="entry-title">Bachelor of Computer Science</div>
+                    <div class="entry-subtitle">University Name</div>
+                    <div class="entry-date">2017</div>
+                    <div class="entry-description">
+                        Graduated with honors, Major in Software Engineering
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills">
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">React</span>
+                    <span class="skill">Node.js</span>
+                    <span class="skill">Python</span>
+                    <span class="skill">SQL</span>
+                    <span class="skill">Git</span>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="section">
-            <h2 class="section-title">Skills</h2>
-            <div class="skills">
-                <span class="skill">Skill 1</span>
-                <span class="skill">Skill 2</span>
-                <span class="skill">Skill 3</span>
-                <span class="skill">Skill 4</span>
-                <span class="skill">Skill 5</span>
-                <span class="skill">Skill 6</span>
+    <!-- Achievements Page -->
+    <div id="achievements" class="page">
+        <div class="container">
+            <h2 class="section-title">Key Achievements</h2>
+            
+            <div class="achievement-card">
+                <h3>Project Leadership Excellence</h3>
+                <p>Successfully led a team of 10 developers to deliver a mission-critical project ahead of schedule, resulting in $1M cost savings.</p>
+            </div>
+
+            <div class="achievement-card">
+                <h3>Innovation Award 2022</h3>
+                <p>Received company-wide recognition for developing an AI-powered solution that increased customer satisfaction by 35%.</p>
+            </div>
+
+            <div class="achievement-card">
+                <h3>Performance Optimization</h3>
+                <p>Improved application response time by 70% through innovative caching and optimization techniques.</p>
             </div>
         </div>
     </div>
+
+    <!-- Books Page -->
+    <div id="books" class="page">
+        <div class="container">
+            <h2 class="section-title">Reading List</h2>
+            
+            <div class="book-card">
+                <div class="book-cover"></div>
+                <div class="book-info">
+                    <h3>Clean Code</h3>
+                    <p>By Robert C. Martin</p>
+                    <p>Key takeaways about writing maintainable and efficient code.</p>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-cover"></div>
+                <div class="book-info">
+                    <h3>Design Patterns</h3>
+                    <p>By Gang of Four</p>
+                    <p>Essential patterns for software design and architecture.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Courses Page -->
+    <div id="courses" class="page">
+        <div class="container">
+            <h2 class="section-title">Professional Development</h2>
+            
+            <div class="course-card">
+                <h3>Advanced React Patterns</h3>
+                <p class="course-platform">Frontend Masters</p>
+                <p>Completed advanced course on React patterns and performance optimization.</p>
+            </div>
+
+            <div class="course-card">
+                <h3>System Design</h3>
+                <p class="course-platform">Coursera</p>
+                <p>Learned scalable system design principles and best practices.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
 </body>
 </html>
